@@ -2,25 +2,20 @@
 import React from "react";
 import SelectItem from "./SelectItem";
 import { useDispatch, useSelector } from "react-redux";
+import {new_input} from "../store/listReducer";
+import {delete_opt} from "../store/optionReducer";
 
-const Select = ({ values, onChange, defaultValue }) => {
+const Select = ({defaultValue }) => {
     const dispatch = useDispatch();
     const options = useSelector(state => state.options.options);
-    const list = useSelector(state=>state.list.list)
+    // const list = useSelector(state=>state.list.list)
 
 
-const selectOption = (name) => {
-    // const listItem = {
-    //     curen : name,
-    //     value: 1
-    // }
+const selectOption = (value) => {
 
-    const selOption = options.find(element => element.curen === name)
-    selOption.value = list[0].value * selOption.rait;
-    console.log(selOption)
+    dispatch(new_input(value));
+    dispatch(delete_opt(options, value));
 
-    dispatch({type:'ADD_LISTITEM', payload:selOption});
-    dispatch({type:'DELETE_OPTION', payload:selOption.curen});
 }
 
 
@@ -36,7 +31,7 @@ const selectOption = (name) => {
             >
                 <option selected>{defaultValue}</option>
                 {options.map((element) => (
-                    <SelectItem key={element.curen} value={element.curen} />
+                    <SelectItem key={element} value={element} />
                 ))}
             </select>
         </div>

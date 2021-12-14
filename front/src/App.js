@@ -1,8 +1,17 @@
 import List from "./components/List";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import Select from "./components/Select";
+import {start_val} from "./store/listReducer";
+import {useDispatch} from "react-redux";
+import {start_opt} from "./store/optionReducer";
 
 function App() {
+    const dispatch = useDispatch();
+
+    useEffect(()=>{dispatch(start_val())
+    dispatch(start_opt())
+    },[])
+
   // const [currencies, SetCurrency] = useState([
   //   { curen: "USD", rait: 1, value: 1 },
   //   { curen: "EUR", rait: 0.8, value: 1 },

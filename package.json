@@ -1,0 +1,36 @@
+{
+  "name": "-converter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "back.js",
+  "scripts": {
+    "start": "node back.js",
+    "server": "nodemon back.js",
+    "front": "npm run start --prefix front",
+    "dev": "concurrently \"npm run server\" \" npm run front\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dexnkt001/-converter.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Dekhand Nikita <dekhand00@mail.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dexnkt001/-converter/issues"
+  },
+  "homepage": "https://github.com/Dexnkt001/-converter#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "xhr2": "^0.2.1"
+  },
+  "devDependencies": {
+    "concurrently": "^6.4.0",
+    "nodemon": "^2.0.15"
+  }
+}
