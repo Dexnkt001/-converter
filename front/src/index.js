@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {Provider} from "react-redux";
-import {store} from "./store/index";
+import {configureStore} from "./store/index";
 
-console.log(store)
+//console.log(store)
 
 
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={configureStore()}>
       <App />
   </Provider>,
 

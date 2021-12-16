@@ -1,6 +1,6 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {new_val} from "../store/listReducer";
+import {FETCH_NEW_VALUE, fetchNewVal, new_val} from "../store/listReducer";
 
 
 
@@ -16,7 +16,11 @@ const ListItem = ({ currency, value }) => {
     //     // dispatch(new_value([value,currency]))
     // }
 
+const fetchNew = ([list, value, currensy]) => {
+    let arr = list.map(element=>element.curen);
 
+    return {type: FETCH_NEW_VALUE, payload: [arr, value,currensy]}
+}
 
     return (
         <li className="list-group-item flex-listItem">
@@ -28,7 +32,7 @@ const ListItem = ({ currency, value }) => {
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
                     value={value}
-                    onChange={(event)=> dispatch(new_val([list, event.target.value,currency]))}
+                     onChange={(event)=> dispatch(fetchNew([list, event.target.value,currency]))}
                 />
             </div>
         </li>

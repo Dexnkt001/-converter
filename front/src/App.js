@@ -1,15 +1,15 @@
 import List from "./components/List";
 import React, {useEffect, useState} from "react";
 import Select from "./components/Select";
-import {start_val} from "./store/listReducer";
+import {fetchStartInp, start_val} from "./store/listReducer";
+import {fetchStartOpt, start_opt} from "./store/optionReducer";
 import {useDispatch} from "react-redux";
-import {start_opt} from "./store/optionReducer";
 
 function App() {
     const dispatch = useDispatch();
-
-    useEffect(()=>{dispatch(start_val())
-    dispatch(start_opt())
+    useEffect(()=>{
+        dispatch(fetchStartInp())
+  dispatch(fetchStartOpt())
     },[])
 
   // const [currencies, SetCurrency] = useState([
