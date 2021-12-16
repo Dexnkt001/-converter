@@ -8,7 +8,6 @@ function List() {
    // const dispatch = useDispatch();
     const list = useSelector((state) => state.list.list);
 
-    console.log(list)
     return (
         <ul className="list-group list-i">
             {list.map((element) => (

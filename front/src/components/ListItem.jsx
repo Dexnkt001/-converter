@@ -1,6 +1,6 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {FETCH_NEW_VALUE, fetchNewVal, new_val} from "../store/listReducer";
+import {FETCH_NEW_VALUE} from "../store/listReducer";
 
 
 
@@ -11,10 +11,6 @@ const ListItem = ({ currency, value }) => {
     const dispatch = useDispatch();
     const list = useSelector((state) => state.list.list);
 
-    // const changeValue = (value, currency) => {
-    //    return  dispatch(new_val([list, value,currency]))
-    //     // dispatch(new_value([value,currency]))
-    // }
 
 const fetchNew = ([list, value, currensy]) => {
     let arr = list.map(element=>element.curen);
@@ -25,7 +21,7 @@ const fetchNew = ([list, value, currensy]) => {
     return (
         <li className="list-group-item flex-listItem">
             <span>{currency}</span>
-            <div class="input-group input-group-sm">
+            <div className="input-group input-group-sm">
                 <input
                     type="text"
                     className="form-control"

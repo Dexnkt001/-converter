@@ -1,8 +1,6 @@
 import {createStore, combineReducers, applyMiddleware} from "redux";
 import {fetchAddValue, fetchNewValue, fetchStartInput, listReducer} from "./listReducer";
 import {fetchDeleteOptions, fetchStartOptions, optionsReducer} from "./optionReducer";
-import {composeWithDevTools} from "redux-devtools-extension";
-import thunk from "redux-thunk";
 import {combineEpics, createEpicMiddleware} from "redux-observable";
 
 
@@ -14,9 +12,6 @@ fetchNewValue,
     fetchDeleteOptions
 )
 
-    // fetchStartInput
-    // fetchNewValue
-
 
 
 const rootReducer = combineReducers({
@@ -26,7 +21,6 @@ const rootReducer = combineReducers({
 
 const epicMiddleware = createEpicMiddleware();
 
- // applyMiddleware(epicMiddleware)
 
 export function configureStore(){
 

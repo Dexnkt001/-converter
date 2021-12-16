@@ -31,7 +31,6 @@ app.get('/new_val', async (req,res)=>{
     current_value = req.query.val
     current_currency = req.query.curen
     const list = req.query.list
-    console.log(`value=${current_value} curen = ${ current_currency} list = ${list}`)
     if( current_value == ''){
         const result = list.split(',').map(element=>{return {
             curen:element,
@@ -46,10 +45,15 @@ app.get('/new_val', async (req,res)=>{
         }
         })
         res.json(result)
+    }else if( Number(current_value) <= 0){
+        const result = list.split(',').map(element=>{return {
+            curen:element,
+            value:current_value
+        }
+        })
+        res.json(result)
     }
-    console.log(list)
     let data = await makeRequest(process.env.URL+'?'+process.env.BASE+current_currency+process.env.AMOUNT+current_value+process.env.SYMBOLS+list)
-    console.log(data)
     const result = list.split(',').map(element=>{return {
         curen:element,
         value:(data.rates[element])
@@ -69,7 +73,6 @@ app.get('/start_val', async (req,res)=>{
             value:data.rates[element]
         }
         })
-    console.log(start_v)
     res.json(start_v)
 })
 
@@ -78,18 +81,14 @@ app.get('/options', async (req,res)=>{
 
     let data = await makeRequest(process.env.URL)
     let start_v =  Object.keys(data.rates).filter(element=> !curren.includes(element))
-    console.log(start_v)
     res.json(start_v)
 })
 
 app.get('/delete_options', async (req,res)=>{
     const currency = req.query.list
     const val = req.query.val
-    console.log('удаляемый элемент - ', val, 'и изночальный массив - ', currency)
     let data = await makeRequest(process.env.URL)
-    console.log(Object.keys(data.rates), 'изночально')
     let start_v =  Object.keys(data.rates).filter(element=> currency.includes(element) && element!=val)
-    console.log(start_v, 'потом')
     res.json(start_v)
 })
 
@@ -100,7 +99,6 @@ app.get('/choose_input', async (req,res)=>{
         curen: currency,
         value: data.rates[currency]
     }
-    console.log(result)
     res.json(result)
 })
 
@@ -120,7 +118,6 @@ const defaultState = (str) => {
         request.send();
         request.onload = async function() {
             let obj =  await request.response;
-            // console.log(obj)
         }
     }catch(error){
         console.log(error)

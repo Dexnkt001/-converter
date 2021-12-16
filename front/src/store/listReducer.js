@@ -17,15 +17,13 @@ export const FETCH_ADD_VALUE = 'FETCH_ADD_VALUE';
 const start_value = (payload) => ({type:START_VALUE, payload});
 const new_value = (payload) =>({type:NEW_VALUE, payload});
 export const fetchStartInp = () => ({type:START_FETCH_INPUT});
-//export const fetchNewVal = (payload) => ({type:FETCH_NEW_VALUE}, payload)
+
 
 
 export const fetchStartInput = action$ => {
-    console.log(action$)
    return action$.pipe(
         ofType(START_FETCH_INPUT),
       mergeMap(() => {
-          console.log('я в мердже')
           return ajax.getJSON('http://localhost:5000/start_val').pipe(
               map(response =>
                   start_value(response))
@@ -35,25 +33,13 @@ export const fetchStartInput = action$ => {
     )
 }
 
-export const new_input = (curren) => {
-    console.log('обавляю новый инпут')
-    return async function (dispatch){
-        console.log('я в диспатче')
-        let req = await fetch(`http://localhost:5000/choose_input?curren=${curren}`)
-        let res = await req.json()
-        return dispatch(add_input(res))
-    }
-}
 
 export const fetchAddValue = action$ => {
-    console.log(action$)
     return action$.pipe(
         ofType(FETCH_ADD_VALUE),
         mergeMap((action) => {
-                console.log('я в мердже - новый инпут', action)
                 return ajax.getJSON(`http://localhost:5000/choose_input?curren=${action.payload}`).pipe(
                     map(response =>{
-                            console.log(response)
                         return add_input(response)
                         }
                     )
@@ -64,16 +50,13 @@ export const fetchAddValue = action$ => {
 }
 
 export const fetchNewValue = action$ => {
-    console.log(action$)
     return action$.pipe(
         ofType(FETCH_NEW_VALUE),
         mergeMap((action) => {
-                console.log('я в мердже', action)
             // let arr = action[0].map(element=>element.curen)
             // console.log(arr)
                 return ajax.getJSON(`http://localhost:5000/new_val?val=${action.payload[1]}&curen=${action.payload[2]}&list=${action.payload[0]}`).pipe(
                     map(response =>{
-                     console.log(response)
                         return new_value(response)
                     }
                     )
@@ -81,36 +64,6 @@ export const fetchNewValue = action$ => {
             }
         )
     )
-}
-
-
-
-// const start_value_1 = action$ => action$.pipe(
-//     ofType(START_VALUE),
-// )
-
-
-export const new_val =  (info) =>{
-    console.log(info)
-    const arr = info[0].map(element=>element.curen)
-    return async function(dispatch){
-        let req = await fetch(`http://localhost:5000/new_val?val=${info[1]}&curen=${info[2]}&list=${arr}`)
-        let res = await req.json()
-
-        console.log(res)
-        return dispatch(new_value(res))
-        // console.log(dispatch({})
-    }
-}
-
-export const start_val = () => {
-    console.log('запуск')
-    return async function (dispatch){
-        console.log('я в диспатче')
-        let req = await fetch('http://localhost:5000/start_val')
-        let res = await req.json()
-        return dispatch(start_value(res))
-    }
 }
 
 
